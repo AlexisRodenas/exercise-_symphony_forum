@@ -50,7 +50,7 @@ class SujetController extends AbstractController
 
         return $this->render('sujet/index.html.twig', [
             'controller_name' => 'SujetController',
-            'truc2' => $sujets
+            'sujets' => $sujets
         ]);
     }
 }

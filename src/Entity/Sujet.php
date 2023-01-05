@@ -32,7 +32,7 @@ class Sujet
     {
         $this->messages = new ArrayCollection();
         $this->DateCreation = new \DateTime();
-        //$this->verouillage = false;
+        $this->verouillage = false;
     }
 
     public function getId(): ?int

@@ -3,8 +3,10 @@
 {% block title %}Hello SujetController!{% endblock %}
 
 {% block body %}
+    <h2>Bienvenue
+        {% if app.user %}
+            {{app.user.email}}
+        {% endif %}
+    </h2>
 	<a href="{{path('app_sujet_add')}}">Ajouter un sujet</a>
-<pre>
-{{dump(truc2)}}
-</pre>
 {% endblock %}
