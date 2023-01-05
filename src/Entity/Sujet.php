@@ -25,6 +25,9 @@ class Sujet
     #[ORM\OneToMany(mappedBy: 'sujet', targetEntity: Message::class, orphanRemoval: true)]
     private Collection $messages;
 
+    #[ORM\Column]
+    private ?bool $verouillage = null;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
@@ -87,6 +90,18 @@ class Sujet
                 $message->setSujet(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isVerouillage(): ?bool
+    {
+        return $this->verouillage;
+    }
+
+    public function setVerouillage(bool $verouillage): self
+    {
+        $this->verouillage = $verouillage;
 
         return $this;
     }
