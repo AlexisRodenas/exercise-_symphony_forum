@@ -2,17 +2,22 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Sujet;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_root')]
     #[Route('/home', name: 'app_home')]
 
-    public function index(): Response
+    public function index(ManagerRegistry $doctrine): Response
     {
-        return $this->redirectToRoute('sujets');
+        $repository = $doctrine->getRepository(Sujet::class);
+        $sujets = $repository->findAll();
+        
+        return $this->render('home/index.html.twig');   
     }
 }

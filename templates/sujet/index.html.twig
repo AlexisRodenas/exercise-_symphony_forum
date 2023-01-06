@@ -1,12 +1,73 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SujetController!{% endblock %}
+{% block title %}Liste des sujets
+{% endblock %}
 
 {% block body %}
-    <h2>Bienvenue
-        {% if app.user %}
-            {{app.user.email}}
-        {% endif %}
-    </h2>
-	<a href="{{path('app_sujet_add')}}">Ajouter un sujet</a>
+	<div class="content-wrap">
+		<div class="btn-add">
+			<a href="{{ path('app_sujet_add') }}">&#x2b; Nouveau sujet
+			</a>
+		</div>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Sujet</th>
+					<th>Auteurs</th>
+					<th>Date de création</th>					
+					<th class="txt-ctr">Messages</th>
+					<th class="txt-ctr">Statut</th>
+					<th class="txt-ctr">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for sujet in sujets %}
+					<tr>
+						<td>
+							<div>
+								<a href="{{ path('sujet_show', {'id':sujet.id}) }}">{{ sujet.titre }}</a>
+							</div>
+						</td>
+						<td>
+						{% if sujet.user %}
+							<div>{{ sujet.user }}</div>
+						{% else %}
+							<div>[utilisateur Supprimer]</div>							
+						{% endif %}
+						</td>						
+						<td>
+							<div>{{ sujet.dateCreation | date("m/d/Y H:i") }}</div>
+						</td>
+						<td class="txt-ctr">{{ sujet.messages | length }}</td>
+						<td class="txt-ctr">
+							{% if sujet.verouillage %}
+								<i class="fas fa-lock"></i>
+							{% else %}
+								<i class="fas fa-lock-open"></i>
+							{% endif %}
+						</td>
+						<td
+							class="txt-ctr">
+							{% if sujet.verouillage %}
+								<a class="lock" href="{{ path('sujet_verrouille', {'id':sujet.id}) }}">
+									<i class="fas fa-unlock"></i>
+								</a>
+							{% else %}
+								<a class="lock" href="{{ path('sujet_verrouille', {'id':sujet.id}) }}">
+									<i class="fas fa-user-lock"></i>
+								</a>
+							{% endif %}
+							<a href="{{ path('app_sujet_edit', {'id':sujet.id}) }}">
+								<i class="fas fa-edit"></i>
+							</a>
+							<a href="{{ path('sujet_delete', {'id':sujet.id}) }}">
+								<i class="fas fa-trash"></i>
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 {% endblock %}

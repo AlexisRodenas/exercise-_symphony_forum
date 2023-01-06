@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	<h1>Editer message sujet</h1>
+{% endblock %}
+
+{% block body %}
+	<div>
+		<h1>Modifier le message</h1>
+		<a href="{{ path('sujet_show', {'id': message.sujet.id}) }}">
+			&#60; Retour au sujet {{ message.sujet.titre }}
+		</a>
+		<div>
+			{{ form_start(messageForm, {'attr': {'novalidate': 'novalidate'}}) }}
+			{{ form_row(messageForm.texte) | raw }}
+			<button type="submit">Valider</button>
+			{{ form_end(messageForm) }}
+		</div>
+	</div>
+
+{% endblock %}

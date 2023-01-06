@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;1,400&display=swap');
+
+:root {
+    --main-bg-color: #3d4042;
+    --color-primary: #060607;
+    --color-secondary: #F4D35E;
+    --color-accent: #cf9157;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Poppins;
+}
+
+/*?CURSOR*/
+.cursor {
+    width: 1rem;
+    height: 1rem;
+    object-fit: contain;
+    background: radial-gradient(circle, var(--color-primary) 80%, transparent 70%);
+    border-radius: 50%;
+    position: absolute;
+    pointer-events: none;
+    z-index: 1000;
+    backdrop-filter: grayscale();
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    background-color: var(--main-bg-color);
+    color: var(--color-primary)
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-accent);
+}
+
+h2 {
+    margin: 0;
+}
+
+a:hover {
+    color: var(--color-secondary);
+}
+
+li {
+    list-style: none;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+#wrapper {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    width: auto;
+    height: 100%;
+    margin-top: 2em;
+}
+
+.app-title {
+    font-size: 1.5rem;
+    padding: 0rem 2.5rem;
+    color: var(--color-secondary);
+}
+
+.content-wrap {
+    width: 95%;
+}
+
+
+table {
+    margin-top: 0rem;
+    width: 100%;
+}
+
+table tr {
+    height: 3em;
+}
+
+table td {
+    border-radius: 4px;
+    border-left: 1px rgba(255, 255, 255, 0.08) solid;
+    border-right: 1px rgba(255, 255, 255, 0.08) solid;
+    border-bottom: 1px rgba(255, 255, 255, 0.08) solid;
+    border-top: 1px rgba(255, 255, 255, 0.452) solid;
+    background-color: rgba(140, 156, 177, 0.197);
+    padding: 0 1rem;
+}
+
+.flex-box {
+    display: flex;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 1.5rem;
+}
+
+.btn-add a {
+    padding: 0.5rem;
+    border: var(--color-accent) 2px solid;
+    border-radius: 4px;
+}
+
+.btn-add a:hover {
+    color: var(--color-secondary);
+    border: var(--color-secondary) 2px solid;
+}

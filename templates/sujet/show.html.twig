@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}
+	{{ sujet.titre }}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div>
+			<div>
+				<h2>{{ sujet.titre }}</h2>
+				Posté le
+				{{ sujet.dateCreation | date("m/d/Y à H:i") }}</p>
+		</div>
+		<div class="flex-box">
+			<a style="margin-right:2rem;" href="{{ path('sujets') }}">
+				&#60; Retour à la liste des sujets
+			</a>
+			{% embed './sujet/lock.html.twig' %}{% endembed %}
+			<a href="{{ path('app_sujet_edit', {'id':sujet.id}) }}">
+				<i class="fas fa-edit"></i>
+			</a>
+			<a href="{{ path('sujet_delete', {'id':sujet.id}) }}">
+				<i class="fas fa-trash"></i>
+			</a>
+						
+		</div>
+		<div class="flex-box" style="align-items: center">
+			<h4 style="margin-right: 1rem">Messages</h4>
+			<div>{{ sujet.messages | length }}</div>
+		</div>
+	</div>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>Message</th>
+			        <th>Auteur</th>
+					<th>Date de création</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for message in sujet.messages %}
+					<tr>
+						<td>
+							<div>{{ message.texte }}</div>
+						</td>
+            <td>
+							<div>
+								<p>{{ message.user }}</p>
+							</div>
+						</td>
+						<td>
+							<div>
+								<p>{{ message.dateCreation | date("m/d/Y H:i") }}</p>
+							</div>
+						</td>
+						<td>
+							<a href="{{ path('message_edit', {'id':message.id}) }}">
+								<i class="fas fa-edit"></i>
+							</a>
+							<a href="{{ path('message_delete', {'id':message.id}) }}">
+								<i class="fas fa-trash"></i>
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div>
+			{% if sujet.verouillage %}
+				<p>Sujet verrouillé</p>
+			{% else %}
+				<div>
+					<p>Nouveau message</p>
+
+					{{ form_start(messageForm, {'attr': {'novalidate': 'novalidate'}}) }}
+					{{ form_row(messageForm.texte) | raw }}
+					<button type="submit">Ajouter</button>
+					{{ form_end(messageForm) }}
+					<a href="{{ path('sujets') }}">Annuler</a>
+				</div>
+			{% endif %}
+		</div>
+	{% endblock %}

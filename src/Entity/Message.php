@@ -24,6 +24,15 @@ class Message
     #[ORM\JoinColumn(nullable: false)]
     private ?Sujet $sujet = null;
 
+    #[ORM\ManyToOne(inversedBy: 'message')]
+    private ?User $user = null;
+
+    public function __construct()
+    {
+        $this->dateCreation = new \DateTime();
+
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +70,18 @@ class Message
     public function setSujet(?Sujet $sujet): self
     {
         $this->sujet = $sujet;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

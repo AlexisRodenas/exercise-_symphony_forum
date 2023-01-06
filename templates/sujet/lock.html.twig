@@ -1,0 +1,9 @@
+{% if sujet.verouillage %}
+	<a class="lock" href="{{ path('sujet_verrouille', {'id':sujet.id}) }}">
+		Ré-ouvrir le sujet<i class="fas fa-unlock"></i>
+	</a>
+{% else %}
+	<a class="lock" href="{{ path('sujet_verrouille', {'id':sujet.id}) }}">
+		Fermer le sujet<i class="fas fa-user-lock"></i>
+	</a>
+{% endif %}

@@ -28,6 +28,10 @@ class Sujet
     #[ORM\Column]
     private ?bool $verouillage = null;
 
+    #[ORM\ManyToOne(inversedBy: 'sujets')]
+    #[ORM\JoinColumn(nullable: true , onDelete:'SET NULL')]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
@@ -102,6 +106,18 @@ class Sujet
     public function setVerouillage(bool $verouillage): self
     {
         $this->verouillage = $verouillage;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

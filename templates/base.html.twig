@@ -7,6 +7,9 @@
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+			<link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+            
         {% endblock %}
 
         {% block javascripts %}
@@ -14,9 +17,7 @@
         {% endblock %}
     </head>
     <body>
-        <pre>
-            {{ dump(sujets) }}
-        </pre>
+
         <ul>
             <li><a href="{{path('app_home')}}">Accueil</a></li>
 
@@ -28,6 +29,11 @@
 
             <li><a href="{{path('app_register')}}">Register</a></li>
         </ul>    
+           <h2>Bienvenue
+        {% if app.user %}
+            {{app.user.email}}
+        {% endif %}
+    </h2>
         {% block body %}{% endblock %}
     </body>
 </html>
